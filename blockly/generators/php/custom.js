@@ -171,18 +171,20 @@ Blockly.PHP['empty_value'] = function(block) {
 };
 
 Blockly.PHP['row'] = function(block) {
+  var dropdown_align = block.getFieldValue('align');
   var statements_input = Blockly.PHP.statementToCode(block, 'input');
 
-  var code = `<div class="row">${statements_input}</div>`;
+  var code = `<div class="row ${dropdown_align}">${statements_input}</div>`;
 
   return code;
 };
 
 Blockly.PHP['column'] = function(block) {
+  var dropdown_align = block.getFieldValue('align');
   var number_width = block.getFieldValue('width');
   var statements_input = Blockly.PHP.statementToCode(block, 'input');
 
-  var code = `<div class="col-${number_width}">${statements_input}</div>`;
+  var code = `<div class="col-${number_width}" style="${dropdown_align}">${statements_input}</div>`;
 
   return code;
 };
@@ -265,31 +267,39 @@ Blockly.PHP['navbar_nav_items'] = function(block) {
 };
 
 Blockly.PHP['content'] = function(block) {
+  var value_style = Blockly.PHP.valueToCode(block, 'style', Blockly.PHP.ORDER_NONE);
   var statements_components = Blockly.PHP.statementToCode(block, 'components');
 
-  var code = `<div>${statements_components}</div>`;
+  var code = `<div style="${value_style}">${statements_components}</div>`;
 
   return code;
 };
 
-
 Blockly.PHP['posts'] = function(block) {
+  var number_posts_per_line = block.getFieldValue('posts_per_line');
   var statements_post = Blockly.PHP.statementToCode(block, 'post');
-  var number_posts_per_page = block.getFieldValue('posts_per_page');
   var value_post_style = Blockly.PHP.valueToCode(block, 'post_style', Blockly.PHP.ORDER_NONE);
 
   var code = `
-  
-  <div id="posts" style="${value_post_style}">
+  <div class="row" id="posts">
     <script>
             $.ajax({
               type: "get",
               contentType: "application/json; charset=utf-8",
-              url: \`https://localhost:44385/Posts?type=\${option_demo}\`,
+              url: \`https://localhost:44385/Posts\`,
               success: function (status) {
                 var code = "";
+                var counter = 1;
                 for (const item in status) {
-                  var newCode = \`${statements_post}\`;
+                  var chars = status[item].body.length;
+                  var newCode = \`<div class="col" style="${value_post_style}">${statements_post}</div>\`;
+
+                  if (counter === ${number_posts_per_line}) {
+                    newCode += \`<div class="w-100"></div>\`;
+                    counter = 0;
+                  }
+
+                  counter++;
                 
                   code += newCode;
                 }
@@ -312,7 +322,7 @@ Blockly.PHP['item_title'] = function(block) {
   var value_post_title_style = Blockly.PHP.valueToCode(block, 'text_style', Blockly.PHP.ORDER_NONE);
 
   var code = `
-  <a href=""> 
+  <a href="\${status[item].link}"> 
     <p style="${value_post_title_style}">
       \${status[item].title}
     </p> 
@@ -321,11 +331,12 @@ Blockly.PHP['item_title'] = function(block) {
 };
 
 Blockly.PHP['item_content'] = function(block) {
+  var number_name = block.getFieldValue('max_chars');
   var value_post_content_style = Blockly.PHP.valueToCode(block, 'text_style', Blockly.PHP.ORDER_NONE);
 
   var code = `
   <div style="${value_post_content_style}">
-  \${status[item].body}
+  \${status[item].body.slice(0, ${number_name})} \${chars > ${number_name} ? "..." : ""}
   </div>`;
   return code;
 };
@@ -346,6 +357,36 @@ Blockly.PHP['footer'] = function(block) {
   <footer class="${dropdown_position}" style="${value_style}">
     ${statements_components}
   </footer>`;
+
+  return code;
+};
+
+Blockly.PHP['unlimited_style'] = function(block) {
+  var code = "";
+  for (var i = 0; i < block.itemCount_; i++) {
+    code += (Blockly.PHP.valueToCode(block, 'ADD' + i, Blockly.PHP.ORDER_NONE) || '') + " ";
+  }
+
+  return [code, Blockly.PHP.ORDER_NONE];
+};
+
+Blockly.PHP['background_color'] = function(block) {
+  var value_name = Blockly.PHP.valueToCode(block, 'NAME', Blockly.PHP.ORDER_NONE);
+
+  var code = `background: ${removeLiterals(value_name)};`;
+
+  return [code, Blockly.PHP.ORDER_NONE];
+};
+
+Blockly.PHP['button'] = function(block) {
+  var dropdown_size = block.getFieldValue('size');
+  var value_text = Blockly.PHP.valueToCode(block, 'text', Blockly.PHP.ORDER_NONE);
+  var value_style = Blockly.PHP.valueToCode(block, 'style', Blockly.PHP.ORDER_NONE);
+
+  var code = `
+  <button type="button" class="btn ${dropdown_size}" style="${value_style}">
+  ${value_text}
+  </button>`;
 
   return code;
 };

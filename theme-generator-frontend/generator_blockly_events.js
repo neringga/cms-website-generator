@@ -51,46 +51,11 @@ function onReload() {
     var end = `</body></html>`;
 
     var fileName = "index.html";
-    // if (option_demo == 1) {
-    //     fileName = "page.html.twig";
-    // }
         
    updateTheme(fileName, begin + code + end);
 
    updateTheme("workspace.txt", Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)));
 
-  // if (workspace.allInputsFilled() && $("#iframe_wordpress").is(":visible")) {
-  //   var blocks = workspace.getTopBlocks();
-  //   for (var i = 0; i < blocks.length; i++) {
-  //         var blockCode = Blockly.PHP.blockToCode(blocks[i]);
-
-  //         var begin= `<!DOCTYPE html>
-  //         <html lang="en">
-  //         <head>
-  //           <meta charset="utf-8">
-  //           <meta name="viewport" content="width=device-width, initial-scale=1">
-  //           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  //           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  //           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  //           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  //           <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-  //           <script>
-  //             var option_demo = ${option_demo};
-  //           </script>
-  //         </head>
-  //         <body>`;
-
-  //         var end = `</body>
-  //         </html>`;
-
-  //         var fileName = "index.php";
-  //         if (option_demo == 1) {
-  //             fileName = "page.html.twig";
-  //         }
-        
-  //         updateTheme(fileName, begin + blockCode + end)
-  //   }
-  // }
 }
 
 function onWorkspaceChange(event) {
@@ -98,31 +63,6 @@ function onWorkspaceChange(event) {
   document.getElementById("codearea").value = code;
 }
 
-// function showCode() {
-//   var blocks = workspace.getTopBlocks();
-//   var zip = new JSZip();
-
-//   // patikrinti ar yra index. jei nera - negeneruoti
-
-//   for (var i = 0; i < blocks.length; i++) {
-//     var blockName = blocks[i].type + ".php";
-//     var blockCode = Blockly.PHP.blockToCode(blocks[i]);
-
-//     zip.file(blockName, blockCode);
-//   }
-
-//   zip.file(
-//     "style.css",
-//     `/*
-//                           Theme Name: New Theme
-//                           Author: Neringa
-//                           */`
-//   );
-
-//   zip.generateAsync({ type: "blob" }).then(function (content) {
-//     saveAs(content, "theme.zip");
-//   });
-// }
 
 function updateTheme(fileName, fileContent) {
   var request = {

@@ -14,12 +14,7 @@
     <script src="../blockly/generators/php/custom.js"></script>
     <script src="../blockly/generators/php/custom_helper.js"></script>
     <script src="generator_blockly_events.js"></script>
-    <script src="../blockly/blocks/custom_templates.js"></script>
-    <script src="../blockly/blocks/custom_content_items.js"></script>
-    <script src="../blockly/blocks/custom_child_components.js"></script>
-    <script src="../blockly/blocks/custom_configuration.js"></script>
-    <script src="../blockly/blocks/custom_layout.js"></script>
-    <script src="../blockly/blocks/custom_header.js"></script>
+    <script src="../blockly/blocks/custom_blocks.js"></script>
 
 
     <!-- bootstrap -->
@@ -53,7 +48,7 @@
               <input type="radio" name="options" id="option_code" autocomplete="off" checked> Code
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option_demo_wp" autocomplete="off"> Website
+              <input type="radio" name="options" id="option_demo_wp" autocomplete="off"> Site
             </label>
             <!-- <label class="btn btn-secondary">
               <input type="radio" name="options" id="option_demo_drupal" autocomplete="off"> Live Drupal
@@ -64,7 +59,7 @@
           </div>
 
             <textarea id="codearea" readonly style="height: 95%; width: 100%;"></textarea>
-            <iframe id="iframe_wordpress" src="http://localhost/testsite" title="Live theme demo" style="height: 95%; width: 100%;"></iframe>
+            <iframe id="iframe_wordpress" src="http://localhost/index.html" title="Live theme demo" style="height: 95%; width: 100%;"></iframe>
 
         </td>
       </tr>
@@ -89,9 +84,6 @@
     <sep></sep>
     <category name="Header">
         <block type="header"></block>
-        <block type="navbar"></block>
-        <block type="navbar_brand"></block>
-        <block type="navbar_nav_items"></block>
     </category>
     <category name="Body">
       <block type="content"></block>
@@ -109,18 +101,26 @@
       <block type="column"></block>
   </category>
     <category name="Configuration">
-        <block type="empty_value"></block>
+      <block type="unlimited_style"></block>
+        <!-- <block type="empty_value"></block> -->
+        <block type="background_color">
+          <value name="NAME">
+            <block type="colour_picker">
+              <field name="COLOUR">#000000</field>
+            </block>
+          </value>
+        </block>
         <block type="pixels"></block>
         <block type="percents"></block>
         <block type="size"></block>
         <block type="text_style"></block>
         <block type="content_margin"></block>
-        <block type="display_style"></block>
         <block type="border"></block>
         <block type="padding"></block>
         <block type="vertical_alignment"></block>
+        <block type="display_style"></block>
       </category>
-      <category name="Content components">
+      <category name="Content">
         <block type="empty_statement"></block>
         <block type="text_custom"></block>
         <block type="image"></block>
@@ -132,70 +132,101 @@
 
           <block type="header">
             <value name="size">
-              <block type="size">
-                <value name="width">
-                  <block type="percents">
-                    <field name="percents">100</field>
-                  </block>
-                </value>
-                <value name="height">
-                  <block type="pixels">
-                    <field name="pixels">50</field>
-                  </block>
-                </value>
-              </block>
+               <block type="size">
+                  <value name="width">
+                     <block type="percents">
+                        <field name="percents">100</field>
+                     </block>
+                  </value>
+                  <value name="height">
+                     <block type="pixels">
+                        <field name="pixels">50</field>
+                     </block>
+                  </value>
+               </block>
             </value>
             <value name="style">
-              <block type="empty_value"></block>
+               <block type="unlimited_style">
+                  <mutation items="3" />
+                  <value name="ADD0">
+                     <block type="background_color">
+                        <value name="NAME">
+                           <block type="colour_picker">
+                              <field name="COLOUR">#ffcc99</field>
+                           </block>
+                        </value>
+                     </block>
+                  </value>
+                  <value name="ADD1">
+                     <block type="content_margin" >
+                        <value name="left_margin">
+                           <block type="percents" >
+                              <field name="percents">1</field>
+                           </block>
+                        </value>
+                        <value name="right_margin">
+                           <block type="percents" >
+                              <field name="percents">1</field>
+                           </block>
+                        </value>
+                        <value name="top_margin">
+                           <block type="percents" >
+                              <field name="percents">1</field>
+                           </block>
+                        </value>
+                        <value name="bottom_margin">
+                           <block type="percents">
+                              <field name="percents">1</field>
+                           </block>
+                        </value>
+                     </block>
+                  </value>
+                  <value name="ADD2">
+                     <block type="border">
+                        <field name="border_style">solid</field>
+                        <value name="border_width">
+                           <block type="pixels">
+                              <field name="pixels">1</field>
+                           </block>
+                        </value>
+                        <value name="border_color">
+                           <block type="colour_picker">
+                              <field name="COLOUR">#999999</field>
+                           </block>
+                        </value>
+                     </block>
+                  </value>
+               </block>
             </value>
             <statement name="content">
-              <block type="navbar">
-                <value name="style">
-                  <block type="display_style">
-                    <value name="margins">
-                      <block type="empty_value"></block>
-                    </value>
-                    <value name="padding">
-                      <block type="empty_value"></block>
-                    </value>
-                    <value name="border">
-                      <block type="empty_value"></block>
-                    </value>
-                    <value name="background">
-                      <block type="colour_picker">
-                        <field name="COLOUR">#e3f2fd</field>
-                      </block>
-                    </value>
-                  </block>
-                  
-                </value>
-                <statement name="content">
-                  <block type="navbar_brand">
-
-                    <value name="components">
-                        <block type="text_custom">
-                          <value name="text">
-                            <block type="text">
-                              <field name="TEXT"></field>
-                            </block>
-                          </value>
-                          <value name="text_style">
-                            <block type="empty_value"></block>
-                          </value>
-                          <value name="margins">
-                            <block type="empty_value"></block>
-                          </value>
-                        </block>
-                    </value>
-                    
-                    <next>
-                      <block type="navbar_nav_items"></block>
-                    </next>
-                  </block>
-                </statement>
-              </block>
+               <block type="text_custom">
+                  <value name="text">
+                     <block type="text">
+                        <field name="TEXT">News</field>
+                     </block>
+                  </value>
+                  <value name="text_style">
+                     <block type="text_style">
+                        <field name="font_style">normal</field>
+                        <field name="font_weight">normal</field>
+                        <field name="font_size">25</field>
+                        <field name="alignment">center</field>
+                        <field name="transformation">0</field>
+                        <value name="font_family">
+                           <block type="text">
+                              <field name="TEXT">Times New Roman</field>
+                           </block>
+                        </value>
+                        <value name="font_color">
+                           <block type="colour_picker">
+                              <field name="COLOUR">#333333</field>
+                           </block>
+                        </value>
+                     </block>
+                  </value>
+               </block>
             </statement>
-          </block>
+         </block>
 
             <block type="border">
               <field name="border_style">solid</field>

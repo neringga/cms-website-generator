@@ -10,19 +10,16 @@
     <script src="../blockly/msg/js/en.js"></script>
     <script src="../blockly/php_compressed.js"></script>
 
-    <!-- mappers -->
-    <script src="bootstrap-mapper/nav-item-mapper.ts"></script>
-
     <!-- random -->
-    <script src="../blockly/blocks/custom_configuration.js"></script>
     <script src="../blockly/generators/php/custom.js"></script>
     <script src="../blockly/generators/php/custom_helper.js"></script>
-    <script src="../blockly/blocks/custom_child_components.js"></script>
     <script src="generator_blockly_events.js"></script>
-
-    <!-- header -->
+    <script src="../blockly/blocks/custom_templates.js"></script>
+    <script src="../blockly/blocks/custom_content_items.js"></script>
+    <script src="../blockly/blocks/custom_child_components.js"></script>
+    <script src="../blockly/blocks/custom_configuration.js"></script>
+    <script src="../blockly/blocks/custom_layout.js"></script>
     <script src="../blockly/blocks/custom_header.js"></script>
-    <script src="../blockly/generators/php/custom_header.js"></script>
 
 
     <!-- bootstrap -->
@@ -36,21 +33,42 @@
   <body style="height: 100%;">
 
     <table style="width:100%; height: 90%; table-layout:fixed;">
-        <tr>
-          <td style="width:70%; height: 100%;">
-  
-            <button type="button" class="btn btn-success" onclick="showCode()" style="margin: 10px;">Generate theme</button>
-  
-            <div id="blocklyDiv" style="height: 95%; width: 100%;"></div>
-  
-          </td>
-          <td style="width:30%; height: 100%;">
-  
-              <textarea id="codearea" readonly style="height: 95%; width: 100%;"></textarea>
-  
-          </td>
-        </tr>
-      </table>
+      <tr>
+        <td style="width:50%; height: 100%;">
+
+          <button type="button" class="btn btn-success" onclick="showCode()" style="margin: 10px;">Generate theme</button>
+
+          <button type="file" id="get_file" class="btn btn-primary" style="margin: 10px;">Import Workspace</button>
+          <input type="file" id="my_file" style="display: none;">
+
+          <div id="blocklyDiv" style="height: 95%; width: 100%;"></div>
+
+        </td>
+        <td style="width:50%; height: 100%;">
+
+          <button type="button" class="btn btn-success" onclick="onReload()">Reload</button>
+
+          <div class="btn-group btn-group-toggle" data-toggle="buttons" style="margin: 5px;">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="option_code" autocomplete="off" checked> Code
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option_demo_wp" autocomplete="off"> Website
+            </label>
+            <!-- <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option_demo_drupal" autocomplete="off"> Live Drupal
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option_demo_joomla" autocomplete="off"> Live Joomla
+            </label> -->
+          </div>
+
+            <textarea id="codearea" readonly style="height: 95%; width: 100%;"></textarea>
+            <iframe id="iframe_wordpress" src="http://localhost/testsite" title="Live theme demo" style="height: 95%; width: 100%;"></iframe>
+
+        </td>
+      </tr>
+    </table>
 
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
@@ -72,7 +90,24 @@
     <category name="Header">
         <block type="header"></block>
         <block type="navbar"></block>
+        <block type="navbar_brand"></block>
+        <block type="navbar_nav_items"></block>
     </category>
+    <category name="Body">
+      <block type="content"></block>
+      <block type="posts"></block>
+      <block type="item_title"></block>
+      <block type="item_content"></block>
+    </category>
+    <category name="Footer">
+      <block type="footer"></block>
+    </category>
+    <sep></sep>
+    <category name="Layout">
+      <block type="container"></block>
+      <block type="row"></block>
+      <block type="column"></block>
+  </category>
     <category name="Configuration">
         <block type="empty_value"></block>
         <block type="pixels"></block>
@@ -83,6 +118,7 @@
         <block type="display_style"></block>
         <block type="border"></block>
         <block type="padding"></block>
+        <block type="vertical_alignment"></block>
       </category>
       <category name="Content components">
         <block type="empty_statement"></block>
@@ -93,6 +129,73 @@
 
     <sep></sep>
         <category name="Configuration examples">
+
+          <block type="header">
+            <value name="size">
+              <block type="size">
+                <value name="width">
+                  <block type="percents">
+                    <field name="percents">100</field>
+                  </block>
+                </value>
+                <value name="height">
+                  <block type="pixels">
+                    <field name="pixels">50</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="style">
+              <block type="empty_value"></block>
+            </value>
+            <statement name="content">
+              <block type="navbar">
+                <value name="style">
+                  <block type="display_style">
+                    <value name="margins">
+                      <block type="empty_value"></block>
+                    </value>
+                    <value name="padding">
+                      <block type="empty_value"></block>
+                    </value>
+                    <value name="border">
+                      <block type="empty_value"></block>
+                    </value>
+                    <value name="background">
+                      <block type="colour_picker">
+                        <field name="COLOUR">#e3f2fd</field>
+                      </block>
+                    </value>
+                  </block>
+                  
+                </value>
+                <statement name="content">
+                  <block type="navbar_brand">
+
+                    <value name="components">
+                        <block type="text_custom">
+                          <value name="text">
+                            <block type="text">
+                              <field name="TEXT"></field>
+                            </block>
+                          </value>
+                          <value name="text_style">
+                            <block type="empty_value"></block>
+                          </value>
+                          <value name="margins">
+                            <block type="empty_value"></block>
+                          </value>
+                        </block>
+                    </value>
+                    
+                    <next>
+                      <block type="navbar_nav_items"></block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
 
             <block type="border">
               <field name="border_style">solid</field>
@@ -234,16 +337,37 @@
       toolbox: document.getElementById("toolbox"),
       zoom:
          {controls: true,
-          wheel: true,
+          wheel: false,
           startScale: 1,
           maxScale: 3,
           minScale: 0.3,
           scaleSpeed: 1.2,
           pinch: true},
-      trashcan: true
-    });
+      trashcan: true,
+      move:{
+        wheel: true
+        }
+      }
+      );
 
     workspace.addChangeListener(onWorkspaceChange);
+
+    document.getElementById('get_file').onclick = function() {
+    document.getElementById('my_file').click();
+
+    $("#my_file").on("change", function () {
+
+          var fr = new FileReader();
+
+          var fr=new FileReader();
+            fr.onload=function() {
+                Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(fr.result), workspace);
+            }
+              
+            fr.readAsText($('#my_file').prop('files')[0]);
+
+    });
+    };
 
   </script>
   

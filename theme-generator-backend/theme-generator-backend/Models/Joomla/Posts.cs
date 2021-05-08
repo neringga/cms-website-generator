@@ -27,7 +27,7 @@ namespace backend.Models.Joomla
         public string rights { get; set; }
     }
 
-    public class Attributes
+    public class JoomlaPostAttributes
     {
         public int id { get; set; }
         public int asset_id { get; set; }
@@ -57,22 +57,22 @@ namespace backend.Models.Joomla
         public List<object> tags { get; set; }
     }
 
-    public class Data
+    public class JoomlaPostData
     {
         public string type { get; set; }
         public string id { get; set; }
-        public Attributes attributes { get; set; }
+        public JoomlaPostAttributes attributes { get; set; }
         public Relationships relationships { get; set; }
     }
 
     public class Category
     {
-        public Data data { get; set; }
+        public JoomlaPostData data { get; set; }
     }
 
     public class Author
     {
-        public Data data { get; set; }
+        public JoomlaPostData data { get; set; }
     }
 
     public class Relationships
@@ -90,7 +90,7 @@ namespace backend.Models.Joomla
     public class JoomlaPost
     {
         public Links links { get; set; }
-        public List<Data> data { get; set; }
+        public List<JoomlaPostData> data { get; set; }
         public Meta meta { get; set; }
     }
 }

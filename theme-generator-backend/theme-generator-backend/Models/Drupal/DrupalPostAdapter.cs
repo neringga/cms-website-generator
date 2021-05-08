@@ -1,4 +1,5 @@
-﻿using backend.Models.Common;
+﻿using System;
+using backend.Models.Common;
 
 namespace backend.Models.Drupal
 {
@@ -14,5 +15,7 @@ namespace backend.Models.Drupal
         public override string id => _post.nid;
         public override string title => _post.title;
         public override string body => _post.body;
+        public override DateTime date => Convert.ToDateTime(_post.created).ToUniversalTime();
+        public override string link => _post.view_node;
     }
 }

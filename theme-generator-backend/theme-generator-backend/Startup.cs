@@ -32,12 +32,12 @@ namespace theme_generator_backend
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "theme_generator_backend", Version = "v1"});
             });
-            // services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            // {
-            //     builder.AllowAnyOrigin()
-            //         .AllowAnyMethod()
-            //         .AllowAnyHeader();
-            // }));
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,12 +53,11 @@ namespace theme_generator_backend
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseCors("MyPolicy");
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             
-            // app.UseCors("MyPolicy");
+            
         }
     }
 }

@@ -45,5 +45,23 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 300,
         "tooltip": "",
         "helpUrl": ""
-      }
+      },
+      {
+        "type": "container",
+        "message0": "Container %1 %2",
+        "args0": [
+          {
+            "type": "input_dummy"
+          },
+          {
+            "type": "input_statement",
+            "name": "components"
+          }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "colour": 230,
+        "tooltip": "",
+        "helpUrl": ""
+      },
 ]);

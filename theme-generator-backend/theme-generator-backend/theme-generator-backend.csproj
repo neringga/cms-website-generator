@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Helpers" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Compile Remove="WeatherForecast.cs" />
     </ItemGroup>
 

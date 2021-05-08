@@ -400,5 +400,33 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 165,
         "tooltip": "",
         "helpUrl": ""
-      }
+      },
+      {
+        "type": "vertical_alignment",
+        "message0": "Vertical alignment %1",
+        "args0": [
+          {
+            "type": "field_dropdown",
+            "name": "option",
+            "options": [
+              [
+                "top",
+                "d-flex align-items-start"
+              ],
+              [
+                "center",
+                "d-flex align-items-center"
+              ],
+              [
+                "bottom",
+                "d-flex align-items-end"
+              ]
+            ]
+          }
+        ],
+        "output": null,
+        "colour": 230,
+        "tooltip": "",
+        "helpUrl": ""
+      },
 ]);

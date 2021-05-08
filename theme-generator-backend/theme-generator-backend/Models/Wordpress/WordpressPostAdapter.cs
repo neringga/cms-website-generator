@@ -1,4 +1,5 @@
-﻿using backend.Models.Common;
+﻿using System;
+using backend.Models.Common;
 using backend.Models.Drupal;
 
 namespace backend.Models.Wordpress
@@ -15,5 +16,7 @@ namespace backend.Models.Wordpress
         public override string id => _post.id.ToString();
         public override string title => _post.title.rendered;
         public override string body => _post.content.rendered;
+        public override DateTime date => Convert.ToDateTime(_post.date);
+        public override string link => _post.link;
     }
 }

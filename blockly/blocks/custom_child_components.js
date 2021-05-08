@@ -70,53 +70,6 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": ""
       },
       {
-        "type": "posts",
-        "message0": "Posts %1 Post content items %2 Posts per page %3 %4 Show thumbnail %5 %6 Post display style %7",
-        "args0": [
-          {
-            "type": "input_dummy"
-          },
-          {
-            "type": "input_statement",
-            "name": "post",
-            "check": [
-              "item_title",
-              "item_content",
-              "item_excerpt"
-            ]
-          },
-          {
-            "type": "field_number",
-            "name": "posts_per_page",
-            "value": 10,
-            "min": 1,
-            "precision": 1
-          },
-          {
-            "type": "input_dummy"
-          },
-          {
-            "type": "field_checkbox",
-            "name": "show_thumbnail",
-            "checked": true
-          },
-          {
-            "type": "input_dummy"
-          },
-          {
-            "type": "input_value",
-            "name": "post_style",
-            "check": "display_style"
-          }
-        ],
-        "inputsInline": false,
-        "previousStatement": null,
-        "nextStatement": null,
-        "colour": 120,
-        "tooltip": "",
-        "helpUrl": ""
-      },
-      {
         "type": "search_field",
         "message0": "Search field",
         "previousStatement": null,

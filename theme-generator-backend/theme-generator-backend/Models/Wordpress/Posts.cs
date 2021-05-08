@@ -135,7 +135,7 @@ namespace backend.Models.Wordpress
         public bool sticky { get; set; }
         public string template { get; set; }
         public string format { get; set; }
-        public Meta meta { get; set; }
+        // public Meta meta { get; set; }
         public List<int> categories { get; set; }
         public List<object> tags { get; set; }
         public Links _links { get; set; }

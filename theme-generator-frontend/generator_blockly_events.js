@@ -1,5 +1,3 @@
-var option_demo = 0;
-
 
 $(document).ready(function () {
   $("#iframe_wordpress").hide();

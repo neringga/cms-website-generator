@@ -174,7 +174,7 @@ Blockly.PHP['row'] = function(block) {
   var dropdown_align = block.getFieldValue('align');
   var statements_input = Blockly.PHP.statementToCode(block, 'input');
 
-  var code = `<div class="row ${dropdown_align}">${statements_input}</div>`;
+  var code = `<div class="row h-100 ${dropdown_align}">${statements_input}</div>`;
 
   return code;
 };
@@ -184,7 +184,7 @@ Blockly.PHP['column'] = function(block) {
   var number_width = block.getFieldValue('width');
   var statements_input = Blockly.PHP.statementToCode(block, 'input');
 
-  var code = `<div class="col-${number_width}" style="${dropdown_align}">${statements_input}</div>`;
+  var code = `<div class="col-${number_width} my-auto" style="${dropdown_align}">${statements_input}</div>`;
 
   return code;
 };
@@ -205,11 +205,12 @@ Blockly.PHP['size'] = function(block) {
 };
 
 Blockly.PHP['header'] = function(block) {
+  var dropdown_position = block.getFieldValue('position');
   var value_size = Blockly.PHP.valueToCode(block, 'size', Blockly.PHP.ORDER_NONE);
   var value_style = Blockly.PHP.valueToCode(block, 'style', Blockly.PHP.ORDER_NONE);
   var statements_content = Blockly.PHP.statementToCode(block, 'content');
   
-  var code = `<header style="${value_style} ${value_size}">${statements_content}</header>`;
+  var code = `<header class="${dropdown_position}" style="${value_style} ${value_size}">${statements_content}</header>`;
 
   return code;
 };
@@ -217,7 +218,7 @@ Blockly.PHP['header'] = function(block) {
 Blockly.PHP['container'] = function(block) {
   var statements_components = Blockly.PHP.statementToCode(block, 'components');
 
-  var code = `<div class="container-flex">${statements_components}</div>`;
+  var code = `<div class="container-flex h-100">${statements_components}</div>`;
 
   return code;
 };
@@ -384,8 +385,8 @@ Blockly.PHP['button'] = function(block) {
   var value_style = Blockly.PHP.valueToCode(block, 'style', Blockly.PHP.ORDER_NONE);
 
   var code = `
-  <button type="button" class="btn ${dropdown_size}" style="${value_style}">
-  ${value_text}
+  <button type="button" class="btn ${dropdown_size}" style="${value_style}" onclick="location.href='\${status[item].link}'">
+  ${removeLiterals(value_text)}
   </button>`;
 
   return code;

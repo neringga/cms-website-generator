@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html style="height: 100%;">
+<html style="height: 100%">
   <head>
-
     <meta charset="utf-8" />
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -16,39 +15,79 @@
     <script src="generator_blockly_events.js"></script>
     <script src="../blockly/blocks/custom_blocks.js"></script>
 
-
     <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
     <!-- boootstap -->
-
   </head>
 
-  <body style="height: 100%;">
-
-    <table style="width:100%; height: 90%; table-layout:fixed;">
+  <body style="height: 100%">
+    <table style="width: 100%; height: 90%; table-layout: fixed">
       <tr>
-        <td style="width:50%; height: 100%;">
+        <td style="width: 50%; height: 100%">
+          <button
+            type="button"
+            class="btn btn-success"
+            onclick="showCode()"
+            style="margin: 10px"
+          >
+            Generate theme
+          </button>
 
-          <button type="button" class="btn btn-success" onclick="showCode()" style="margin: 10px;">Generate theme</button>
+          <button
+            type="file"
+            id="get_file"
+            class="btn btn-primary"
+            style="margin: 10px"
+          >
+            Import Workspace
+          </button>
+          <input type="file" id="my_file" style="display: none" />
 
-          <button type="file" id="get_file" class="btn btn-primary" style="margin: 10px;">Import Workspace</button>
-          <input type="file" id="my_file" style="display: none;">
-
-          <div id="blocklyDiv" style="height: 95%; width: 100%;"></div>
-
+          <div id="blocklyDiv" style="height: 95%; width: 100%"></div>
         </td>
-        <td style="width:50%; height: 100%;">
+        <td style="width: 50%; height: 100%">
+          <button type="button" class="btn btn-success" onclick="onReload()">
+            Reload
+          </button>
 
-          <button type="button" class="btn btn-success" onclick="onReload()">Reload</button>
-
-          <div class="btn-group btn-group-toggle" data-toggle="buttons" style="margin: 5px;">
+          <div
+            class="btn-group btn-group-toggle"
+            data-toggle="buttons"
+            style="margin: 5px"
+          >
             <label class="btn btn-secondary active">
-              <input type="radio" name="options" id="option_code" autocomplete="off" checked> Code
+              <input
+                type="radio"
+                name="options"
+                id="option_code"
+                autocomplete="off"
+                checked
+              />
+              Code
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option_demo_wp" autocomplete="off"> Site
+              <input
+                type="radio"
+                name="options"
+                id="option_demo_wp"
+                autocomplete="off"
+              />
+              Site
             </label>
             <!-- <label class="btn btn-secondary">
               <input type="radio" name="options" id="option_demo_drupal" autocomplete="off"> Live Drupal
@@ -58,50 +97,61 @@
             </label> -->
           </div>
 
-            <textarea id="codearea" readonly style="height: 95%; width: 100%;"></textarea>
-            <iframe id="iframe_wordpress" src="http://localhost/index.html" title="Live theme demo" style="height: 95%; width: 100%;"></iframe>
-
+          <textarea
+            id="codearea"
+            readonly
+            style="height: 95%; width: 100%"
+          ></textarea>
+          <iframe
+            id="iframe_wordpress"
+            src="http://localhost/index.html"
+            title="Live theme demo"
+            style="height: 95%; width: 100%"
+          ></iframe>
         </td>
       </tr>
     </table>
 
-
-  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <category name="Text">
-      <block type="text">
-        <field name="TEXT"></field>
-      </block>
-    </category>
-    <category name="Colour">
-      <block type="colour_picker">
-        <field name="COLOUR">#000000</field>
-      </block>
-      <block type="colour_picker">
-        <field name="COLOUR">#ffffff</field>
-      </block>
-      <block type="hex_color_code"></block>
-    </category>
-    <sep></sep>
-    <category name="Header">
+    <xml
+      xmlns="https://developers.google.com/blockly/xml"
+      id="toolbox"
+      style="display: none"
+    >
+      <category name="Text">
+        <block type="text">
+          <field name="TEXT"></field>
+        </block>
+      </category>
+      <category name="Colour">
+        <block type="colour_picker">
+          <field name="COLOUR">#000000</field>
+        </block>
+        <block type="colour_picker">
+          <field name="COLOUR">#ffffff</field>
+        </block>
+        <block type="hex_color_code"></block>
+      </category>
+      <sep></sep>
+      <category name="Header">
         <block type="header"></block>
-    </category>
-    <category name="Body">
-      <block type="content"></block>
-      <block type="posts"></block>
-      <block type="item_title"></block>
-      <block type="item_content"></block>
-    </category>
-    <category name="Footer">
-      <block type="footer"></block>
-    </category>
-    <sep></sep>
-    <category name="Layout">
-      <block type="container"></block>
-      <block type="row"></block>
-      <block type="column"></block>
-  </category>
-    <category name="Configuration">
-      <block type="unlimited_style"></block>
+      </category>
+      <category name="Body">
+        <block type="content"></block>
+        <block type="posts"></block>
+        <block type="item_title"></block>
+        <block type="item_content"></block>
+      </category>
+      <category name="Footer">
+        <block type="footer"></block>
+      </category>
+      <sep></sep>
+      <category name="Layout">
+        <block type="container"></block>
+        <block type="row"></block>
+        <block type="column"></block>
+      </category>
+      <category name="Configuration">
+        <block type="unlimited_style"></block>
         <!-- <block type="empty_value"></block> -->
         <block type="background_color">
           <value name="NAME">
@@ -124,158 +174,259 @@
         <block type="empty_statement"></block>
         <block type="text_custom"></block>
         <block type="image"></block>
+        <block type="button"></block>
       </category>
 
+      <sep></sep>
+      <category name="Configuration examples">
+        <block type="header"
+          >
+          <value name="position"></value>
+          <value name="style"
+            ><block type="unlimited_style"
+              ><mutation items="3"></mutation
+              ><value name="ADD0"
+                ><block type="background_color"
+                  ><value name="NAME"
+                    ><block type="hex_color_code"
+                      ><field name="hex_colour">#696969</field></block
+                    ></value
+                  ></block
+                ></value
+              ><value name="ADD1"
+                ><block type="size"
+                  ><value name="height"
+                    ><block type="pixels"
+                      ><field name="pixels">50</field></block
+                    ></value
+                  ></block
+                ></value
+              ></block
+            ></value
+          ><statement name="content"
+            ><block type="container"
+              ><statement name="components"
+                ><block type="row"
+                  ><field name="align">justify-content-start</field
+                  ><statement name="input"
+                    ><block type="column"
+                      ><field name="align">text-align: right;</field
+                      ><field name="width">1</field
+                      ><statement name="input"
+                        ><block type="image"
+                          ><field name="image_opacity">1</field
+                          ><value name="image_url"
+                            ><block type="text"
+                              ><field name="TEXT"
+                                >https://cdn3.iconfinder.com/data/icons/ballicons-reloaded-free/512/icon-70-512.png</field
+                              ></block
+                            ></value
+                          ><value name="width"
+                            ><block type="pixels"
+                              ><field name="pixels">40</field></block
+                            ></value
+                          ><value name="height"
+                            ><block type="pixels"
+                              ><field name="pixels">40</field></block
+                            ></value
+                          ></block
+                        ></statement
+                      ></block
+                    ></statement
+                  ></block
+                ></statement
+              ></block
+            ></statement
+          ></block
+        >
 
-    <sep></sep>
-        <category name="Configuration examples">
+        ><block type="content"
+          ><value name="style"
+            ><block type="unlimited_style"
+              ><mutation items="3"></mutation
+              ><value name="ADD0"
+                ><block type="content_margin"
+                  ><value name="left_margin"
+                    ><block type="percents"
+                      ><field name="percents">5</field></block
+                    ></value
+                  ><value name="right_margin"
+                    ><block type="percents"
+                      ><field name="percents">5</field></block
+                    ></value
+                  ><value name="top_margin"
+                    ><block type="percents"
+                      ><field name="percents">2</field></block
+                    ></value
+                  ><value name="bottom_margin"
+                    ><block type="percents"
+                      ><field name="percents">2</field></block
+                    ></value
+                  ></block
+                ></value
+              ></block
+            ></value
+          ><statement name="components"
+            ><block type="container"
+              ><statement name="components"
+                ><block type="posts"
+                  ><field name="posts_per_line">1</field
+                  ><value name="post_style"
+                    ><block type="unlimited_style"
+                      ><mutation items="3"></mutation
+                      ><value name="ADD0"
+                        ><block type="content_margin"
+                          ><value name="left_margin"
+                            ><block type="percents"
+                              ><field name="percents">5</field></block
+                            ></value
+                          ><value name="right_margin"
+                            ><block type="percents"
+                              ><field name="percents">5</field></block
+                            ></value
+                          ><value name="top_margin"
+                            ><block type="percents"
+                              ><field name="percents">2</field></block
+                            ></value
+                          ><value name="bottom_margin"
+                            ><block type="percents"
+                              ><field name="percents">2</field></block
+                            ></value
+                          ></block
+                        ></value
+                      ><value name="ADD1"
+                        ><block type="border"
+                          ><field name="border_style">solid</field
+                          ><value name="border_width"
+                            ><block type="pixels"
+                              ><field name="pixels">1</field></block
+                            ></value
+                          ><value name="border_color"
+                            ><block type="hex_color_code"
+                              ><field name="hex_colour">#c0cac6</field></block
+                            ></value
+                          ></block
+                        ></value
+                      ></block
+                    ></value
+                  ><statement name="post"
+                    ><block type="item_title"
+                      ><value name="text_style"
+                        ><block type="text_style"
+                          ><field name="font_style">normal</field
+                          ><field name="font_weight">normal</field
+                          ><field name="font_size">24</field
+                          ><field name="alignment">left</field
+                          ><field name="transformation">0</field
+                          ><value name="font_family"
+                            ><block type="text"
+                              ><field name="TEXT">Arial</field></block
+                            ></value
+                          ><value name="font_color"
+                            ><block type="colour_picker"
+                              ><field name="COLOUR">#333333</field></block
+                            ></value
+                          ><value name="background_color"
+                            ><block
+                              type="empty_value"
+                            ></block></value></block></value
+                      ><next
+                        ><block type="item_content"
+                          ><field name="max_chars">256</field
+                          ><value name="text_style"
+                            ><block type="text_style"
+                              ><field name="font_style">normal</field
+                              ><field name="font_weight">normal</field
+                              ><field name="font_size">14</field
+                              ><field name="alignment">left</field
+                              ><field name="transformation">0</field
+                              ><value name="font_family"
+                                ><block type="text"
+                                  ><field name="TEXT">Arial</field></block
+                                ></value
+                              ><value name="font_color"
+                                ><block type="colour_picker"
+                                  ><field name="COLOUR">#000000</field></block
+                                ></value
+                              ><value name="background_color"
+                                ><block
+                                  type="empty_value"
+                                ></block></value></block></value></block></next></block></statement></block></statement></block></statement
+        ></block>
 
-          <block type="header">
-            <value name="size">
-               <block type="size">
-                  <value name="width">
-                     <block type="percents">
-                        <field name="percents">100</field>
-                     </block>
-                  </value>
-                  <value name="height">
-                     <block type="pixels">
-                        <field name="pixels">50</field>
-                     </block>
-                  </value>
-               </block>
-            </value>
-            <value name="style">
-               <block type="unlimited_style">
-                  <mutation items="3" />
-                  <value name="ADD0">
-                     <block type="background_color">
-                        <value name="NAME">
-                           <block type="colour_picker">
-                              <field name="COLOUR">#ffcc99</field>
-                           </block>
-                        </value>
-                     </block>
-                  </value>
-                  <value name="ADD1">
-                     <block type="content_margin" >
-                        <value name="left_margin">
-                           <block type="percents" >
-                              <field name="percents">1</field>
-                           </block>
-                        </value>
-                        <value name="right_margin">
-                           <block type="percents" >
-                              <field name="percents">1</field>
-                           </block>
-                        </value>
-                        <value name="top_margin">
-                           <block type="percents" >
-                              <field name="percents">1</field>
-                           </block>
-                        </value>
-                        <value name="bottom_margin">
-                           <block type="percents">
-                              <field name="percents">1</field>
-                           </block>
-                        </value>
-                     </block>
-                  </value>
-                  <value name="ADD2">
-                     <block type="border">
-                        <field name="border_style">solid</field>
-                        <value name="border_width">
-                           <block type="pixels">
-                              <field name="pixels">1</field>
-                           </block>
-                        </value>
-                        <value name="border_color">
-                           <block type="colour_picker">
-                              <field name="COLOUR">#999999</field>
-                           </block>
-                        </value>
-                     </block>
-                  </value>
-               </block>
-            </value>
-            <statement name="content">
-               <block type="text_custom">
-                  <value name="text">
-                     <block type="text">
-                        <field name="TEXT">News</field>
-                     </block>
-                  </value>
-                  <value name="text_style">
-                     <block type="text_style">
-                        <field name="font_style">normal</field>
-                        <field name="font_weight">normal</field>
-                        <field name="font_size">25</field>
-                        <field name="alignment">center</field>
-                        <field name="transformation">0</field>
-                        <value name="font_family">
-                           <block type="text">
-                              <field name="TEXT">Times New Roman</field>
-                           </block>
-                        </value>
-                        <value name="font_color">
-                           <block type="colour_picker">
-                              <field name="COLOUR">#333333</field>
-                           </block>
-                        </value>
-                     </block>
-                  </value>
-               </block>
-            </statement>
-         </block>
+        <block type="border">
+          <field name="border_style">solid</field>
+          <value name="border_width">
+            <block type="pixels">
+              <field name="pixels">1</field>
+            </block>
+          </value>
+          <value name="border_color">
+            <block type="colour_picker">
+              <field name="COLOUR">#000000</field>
+            </block>
+          </value>
+        </block>
 
-            <block type="border">
-              <field name="border_style">solid</field>
-              <value name="border_width">
-                <block type="pixels">
-                  <field name="pixels">1</field>
-                </block>
-              </value>
-              <value name="border_color">
-                <block type="colour_picker">
-                  <field name="COLOUR">#000000</field>
-                </block>
-              </value>
+        <block type="size">
+          <value name="width">
+            <block type="percents">
+              <field name="percents">100</field>
             </block>
-      
-            <block type="size">
-              <value name="width">
-                <block type="percents">
-                  <field name="percents">100</field>
-                </block>
-              </value>
-              <value name="height">
-                <block type="pixels">
-                  <field name="pixels">50</field>
-                </block>
-              </value>
+          </value>
+          <value name="height">
+            <block type="pixels">
+              <field name="pixels">50</field>
             </block>
-      
-            <block type="text_style">
-              <field name="font_style">normal</field>
-              <field name="font_weight">normal</field>
-              <field name="font_size">14</field>
-              <field name="alignment">center</field>
-              <field name="transformation">0</field>
-              <value name="font_family">
-                <block type="text">
-                  <field name="TEXT">Arial</field>
-                </block>
-              </value>
-              <value name="background_color">
-                <block type="empty_value"></block>
-              </value>
-              <value name="font_color">
-                <block type="colour_picker">
-                  <field name="COLOUR">#000000</field>
-                </block>
-              </value>
+          </value>
+        </block>
+
+        <block type="text_style">
+          <field name="font_style">normal</field>
+          <field name="font_weight">normal</field>
+          <field name="font_size">14</field>
+          <field name="alignment">center</field>
+          <field name="transformation">0</field>
+          <value name="font_family">
+            <block type="text">
+              <field name="TEXT">Arial</field>
             </block>
-      
+          </value>
+          <value name="background_color">
+            <block type="empty_value"></block>
+          </value>
+          <value name="font_color">
+            <block type="colour_picker">
+              <field name="COLOUR">#000000</field>
+            </block>
+          </value>
+        </block>
+
+        <block type="content_margin">
+          <value name="left_margin">
+            <block type="percents">
+              <field name="percents">0</field>
+            </block>
+          </value>
+          <value name="right_margin">
+            <block type="percents">
+              <field name="percents">0</field>
+            </block>
+          </value>
+          <value name="top_margin">
+            <block type="percents">
+              <field name="percents">0</field>
+            </block>
+          </value>
+          <value name="bottom_margin">
+            <block type="percents">
+              <field name="percents">0</field>
+            </block>
+          </value>
+        </block>
+
+        <block type="display_style">
+          <value name="margins">
             <block type="content_margin">
               <value name="left_margin">
                 <block type="percents">
@@ -298,109 +449,80 @@
                 </block>
               </value>
             </block>
-      
-            <block type="display_style">
-              <value name="margins">
-                <block type="content_margin">
-                  <value name="left_margin">
-                    <block type="percents">
-                      <field name="percents">0</field>
-                    </block>
-                  </value>
-                  <value name="right_margin">
-                    <block type="percents">
-                      <field name="percents">0</field>
-                    </block>
-                  </value>
-                  <value name="top_margin">
-                    <block type="percents">
-                      <field name="percents">0</field>
-                    </block>
-                  </value>
-                  <value name="bottom_margin">
-                    <block type="percents">
-                      <field name="percents">0</field>
-                    </block>
-                  </value>
+          </value>
+          <value name="padding">
+            <block type="padding">
+              <value name="left">
+                <block type="percents">
+                  <field name="percents">0</field>
                 </block>
               </value>
-              <value name="padding">
-                <block type="padding">
-                  <value name="left">
-                    <block type="percents">
-                      <field name="percents">0</field>
-                    </block>
-                  </value>
-                  <value name="right">
-                    <block type="percents">
-                      <field name="percents">0</field>
-                    </block>
-                  </value>
-                  <value name="top">
-                    <block type="percents">
-                      <field name="percents">0</field>
-                    </block>
-                  </value>
-                  <value name="bottom">
-                    <block type="percents">
-                      <field name="percents">0</field>
-                    </block>
-                  </value>
+              <value name="right">
+                <block type="percents">
+                  <field name="percents">0</field>
                 </block>
               </value>
-              <value name="border">
-                <block type="empty_value"></block>
+              <value name="top">
+                <block type="percents">
+                  <field name="percents">0</field>
+                </block>
               </value>
-              <value name="background">
-                <block type="colour_picker">
-                  <field name="COLOUR">#000000</field>
+              <value name="bottom">
+                <block type="percents">
+                  <field name="percents">0</field>
                 </block>
               </value>
             </block>
-      
-          </category>
-    
-  </xml>
+          </value>
+          <value name="border">
+            <block type="empty_value"></block>
+          </value>
+          <value name="background">
+            <block type="colour_picker">
+              <field name="COLOUR">#000000</field>
+            </block>
+          </value>
+        </block>
+      </category>
+    </xml>
 
-  <script>
-
-    var workspace = Blockly.inject("blocklyDiv", {
-      toolbox: document.getElementById("toolbox"),
-      zoom:
-         {controls: true,
+    <script>
+      var workspace = Blockly.inject("blocklyDiv", {
+        toolbox: document.getElementById("toolbox"),
+        zoom: {
+          controls: true,
           wheel: false,
           startScale: 1,
           maxScale: 3,
           minScale: 0.3,
           scaleSpeed: 1.2,
-          pinch: true},
-      trashcan: true,
-      move:{
-        wheel: true
-        }
-      }
-      );
+          pinch: true,
+        },
+        trashcan: true,
+        move: {
+          wheel: true,
+        },
+      });
 
-    workspace.addChangeListener(onWorkspaceChange);
+      workspace.addChangeListener(onWorkspaceChange);
 
-    document.getElementById('get_file').onclick = function() {
-    document.getElementById('my_file').click();
+      document.getElementById("get_file").onclick = function () {
+        document.getElementById("my_file").click();
 
-    $("#my_file").on("change", function () {
-
+        $("#my_file").on("change", function () {
           var fr = new FileReader();
 
-          var fr=new FileReader();
-            fr.onload=function() {
-                Blockly.Xml.clearWorkspaceAndLoadFromXml(Blockly.Xml.textToDom(fr.result), workspace);
-            }
-              
-            fr.readAsText($('#my_file').prop('files')[0]);
+          var fr = new FileReader();
+          fr.onload = function () {
+            Blockly.Xml.clearWorkspaceAndLoadFromXml(
+              Blockly.Xml.textToDom(fr.result),
+              workspace
+            );
+          };
 
-    });
-    };
-
-  </script>
-  
-</body>
+          fr.readAsText($("#my_file").prop("files")[0]);
+        });
+      };
+    </script>
+  </body>
 </html>

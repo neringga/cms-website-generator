@@ -12,15 +12,15 @@ Blockly.defineBlocksWithJsonArray([
         "options": [
           [
             "small",
-            ".btn-xs"
+            "btn-sm"
           ],
           [
             "medium",
-            ".btn-sm"
+            ""
           ],
           [
             "large",
-            ".btn-lg"
+            "btn-lg"
           ]
         ]
       },
@@ -827,14 +827,27 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
       "type": "header",
-      "message0": "HEADER %1 Size %2 Style %3 Components %4",
+      "message0": "HEADER %1 Position %2 %3 Style %4 Components %5",
       "args0": [
         {
           "type": "input_dummy"
         },
         {
-          "type": "input_value",
-          "name": "size"
+          "type": "field_dropdown",
+          "name": "position",
+          "options": [
+            [
+              "sticky",
+              "sticky-top"
+            ],
+            [
+              "fixed",
+              ""
+            ]
+          ]
+        },
+        {
+          "type": "input_dummy"
         },
         {
           "type": "input_value",

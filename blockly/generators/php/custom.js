@@ -292,7 +292,7 @@ Blockly.PHP['posts'] = function(block) {
                 var code = "";
                 var counter = 1;
                 for (const item in status) {
-                  var chars = status[item].body.length;
+                  var chars = status[item].post_body.length;
                   var newCode = \`<div class="col" style="${value_post_style}">${statements_post}</div>\`;
 
                   if (counter === ${number_posts_per_line}) {
@@ -323,9 +323,9 @@ Blockly.PHP['item_title'] = function(block) {
   var value_post_title_style = Blockly.PHP.valueToCode(block, 'text_style', Blockly.PHP.ORDER_NONE);
 
   var code = `
-  <a href="\${status[item].link}"> 
+  <a href="\${status[item].post_link}"> 
     <p style="${value_post_title_style}">
-      \${status[item].title}
+      \${status[item].post_title}
     </p> 
   </a>`;
   return code;
@@ -337,7 +337,7 @@ Blockly.PHP['item_content'] = function(block) {
 
   var code = `
   <div style="${value_post_content_style}">
-  \${status[item].body.slice(0, ${number_name})} \${chars > ${number_name} ? "..." : ""}
+  \${status[item].post_body.slice(0, ${number_name})} \${chars > ${number_name} ? "..." : ""}
   </div>`;
   return code;
 };
@@ -385,7 +385,7 @@ Blockly.PHP['button'] = function(block) {
   var value_style = Blockly.PHP.valueToCode(block, 'style', Blockly.PHP.ORDER_NONE);
 
   var code = `
-  <button type="button" class="btn ${dropdown_size}" style="${value_style}" onclick="location.href='\${status[item].link}'">
+  <button type="button" class="btn ${dropdown_size}" style="${value_style}" onclick="location.href='\${status[item].post_link}'">
   ${removeLiterals(value_text)}
   </button>`;
 

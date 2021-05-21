@@ -28,16 +28,13 @@
           </e>
           <e p="Constants.cs" t="Include" />
           <e p="Drupal" t="Include">
-            <e p="DrupalPostAdapter.cs" t="Include" />
             <e p="Posts.cs" t="Include" />
           </e>
           <e p="Joomla" t="Include">
-            <e p="JoomlaPostAdapter.cs" t="Include" />
             <e p="Posts.cs" t="Include" />
           </e>
           <e p="Wordpress" t="Include">
             <e p="Posts.cs" t="Include" />
-            <e p="WordpressPostAdapter.cs" t="Include" />
           </e>
         </e>
         <e p="obj" t="ExcludeRecursive">

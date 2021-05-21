@@ -38,7 +38,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 230,
+    "colour": 45,
     "tooltip": "",
     "helpUrl": ""
   },
@@ -88,7 +88,7 @@ Blockly.defineBlocksWithJsonArray([
         "inputsInline": false,
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 120,
+        "colour": 45,
         "tooltip": "",
         "helpUrl": ""
       },
@@ -125,7 +125,7 @@ Blockly.defineBlocksWithJsonArray([
         "inputsInline": false,
         "previousStatement": null,
         "nextStatement": null,
-        "colour": 120,
+        "colour": 45,
         "tooltip": "",
         "helpUrl": ""
       },
@@ -918,13 +918,13 @@ Blockly.defineBlocksWithJsonArray([
       "inputsInline": false,
       "previousStatement": null,
       "nextStatement": null,
-      "colour": 240,
+      "colour": 45,
       "tooltip": "",
       "helpUrl": ""
     },
     {
       "type": "footer",
-      "message0": "FOOTER %1 Position %2 %3 Style %4 %5",
+      "message0": "FOOTER %1 Position %2 %3 Style %4 Components %5",
       "args0": [
         {
           "type": "input_dummy"
@@ -955,7 +955,7 @@ Blockly.defineBlocksWithJsonArray([
           "name": "components"
         }
       ],
-      "colour": 230,
+      "colour": 120,
       "tooltip": "",
       "helpUrl": ""
     },

@@ -20,19 +20,12 @@ namespace theme_generator_backend.Controllers
         {
             _themeHelper = new ThemeHelper();
         }
-        
-        // GET api/themeUpdating
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] {"value1", "value2"};
-        }
 
         // POST api/themeUpdating
         [HttpPost]
         public HttpResponseMessage Post([FromBody] Request request)
         {
-            _themeHelper.UpdateThemeAsync(request.Type, request.Title, request.Content);
+            _themeHelper.UpdateThemeAsync(request.Title, request.Content);
             
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
@@ -40,7 +33,6 @@ namespace theme_generator_backend.Controllers
     
     public class Request
     {
-        public DataType Type { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
     }

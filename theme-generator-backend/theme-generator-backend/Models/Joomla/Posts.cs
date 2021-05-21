@@ -1,7 +1,9 @@
-﻿﻿using System.Collections.Generic;
+﻿﻿using System;
+ using System.Collections.Generic;
 using System.Text.Json.Serialization;
+ using backend.Models.Common;
 
-namespace backend.Models.Joomla
+ namespace backend.Models.Joomla
 {
     public class Links
     {
@@ -27,7 +29,7 @@ namespace backend.Models.Joomla
         public string rights { get; set; }
     }
 
-    public class JoomlaPostAttributes
+    public class JoomlaPostAttributes: Post
     {
         public int id { get; set; }
         public int asset_id { get; set; }
@@ -55,6 +57,12 @@ namespace backend.Models.Joomla
         public string typeAlias { get; set; }
         public string text { get; set; }
         public List<object> tags { get; set; }
+        
+        public override string post_id => id.ToString();
+        public override string post_title => title;
+        public override string post_body => text;
+        public override DateTime post_date => Convert.ToDateTime(created);
+        public override string post_link => "";
     }
 
     public class JoomlaPostData

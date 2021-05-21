@@ -1,8 +1,9 @@
 ﻿﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+ using backend.Models.Common;
 
-namespace backend.Models.Wordpress
+ namespace backend.Models.Wordpress
 {
     public class Guid
     {
@@ -113,7 +114,7 @@ namespace backend.Models.Wordpress
         public List<Cury> curies { get; set; }
     }
 
-    public class WordpressPost
+    public class WordpressPost: Post
     {
         public int id { get; set; }
         public DateTime date { get; set; }
@@ -139,5 +140,11 @@ namespace backend.Models.Wordpress
         public List<int> categories { get; set; }
         public List<object> tags { get; set; }
         public Links _links { get; set; }
+        
+        public override string post_id => id.ToString();
+        public override string post_title => title.rendered;
+        public override string post_body => content.rendered;
+        public override DateTime post_date => Convert.ToDateTime(date);
+        public override string post_link => link;
     }
 }

@@ -14,14 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace theme_generator_backend.Controllers
-{
-    public enum DataType
-    {
-        Wordpress,
-        Drupal,
-        Joomla
-    }
-    
+{ 
     [AllowAnonymous]
     [ApiController]
     [Route("[controller]")]
@@ -52,66 +45,20 @@ namespace theme_generator_backend.Controllers
             
             foreach (var drupalPost in drupalPosts)
             {
-                posts.Add(new DrupalPostAdapter(drupalPost));
+                posts.Add(drupalPost);
             }
             
             foreach (var wpPost in wpPosts)
             {
-                posts.Add(new WordpressPostAdapter(wpPost));
+                posts.Add(wpPost);
             }
             
             foreach (var post in joomlaPosts.data)
             {
-                posts.Add(new JoomlaPostAdapter(post.attributes));
+                posts.Add(post.attributes);
             }
 
-            return posts.OrderByDescending(x => x.date);
+            return posts.OrderByDescending(x => x.post_date);
         }
-
-        // [HttpGet]
-        // public async Task<IEnumerable<Post>> Get(DataType type)
-        // {
-        //     List<Post> posts = new List<Post>();
-        //     switch (type)
-        //     {
-        //         case DataType.Drupal:
-        //             var result = await (new DataFetcher<IEnumerable<DrupalPost>>())
-        //                 .GetData(Constants.BasePath + Constants.DrupalPosts)
-        //                 .ConfigureAwait(false);
-        //
-        //             foreach (var drupalPost in result)
-        //             {
-        //                 posts.Add(new DrupalPostAdapter(drupalPost));
-        //             }
-        //
-        //             break;
-        //         
-        //         case DataType.Wordpress:
-        //             var result2 = await (new DataFetcher<IEnumerable<WordpressPost>>())
-        //                 .GetData(Constants.BasePath + Constants.WordpressPosts)
-        //                 .ConfigureAwait(false);
-        //
-        //             foreach (var wpPost in result2)
-        //             {
-        //                 posts.Add(new WordpressPostAdapter(wpPost));
-        //             }
-        //
-        //             break;
-        //         
-        //         case DataType.Joomla:
-        //             var result3 = await (new JsonAPIDataFetcher<JoomlaPost>())
-        //                 .GetData(Constants.BasePath + Constants.JoomlaPosts, Constants.JoomlaAuthKey, Constants.JoomlaAuthValue)
-        //                 .ConfigureAwait(false);
-        //
-        //             foreach (var post in result3.data)
-        //             {
-        //                 posts.Add(new JoomlaPostAdapter(post.attributes));
-        //             }
-        //
-        //             break;
-        //     }
-        //
-        //     return posts;
-        // }
     }
 }

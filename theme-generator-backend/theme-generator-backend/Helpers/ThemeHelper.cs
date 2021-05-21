@@ -6,17 +6,14 @@
 {
     public interface IThemeHelper
     {
-        void UpdateThemeAsync(DataType type, string title, string content);
+        void UpdateThemeAsync(string title, string content);
     }
 
     public class ThemeHelper : IThemeHelper
     {
-        private const string PathToWordpressTheme = @"C:\xampp\htdocs\testsite\wp-content\themes\basic_theme\";
-        private const string PathToDrupalTheme = @"C:\xampp\htdocs\drupal1\themes\new_theme\templates\";
-        private const string PathToJoomlaTheme = @"C:\xampp\htdocs\joomla-4\templates\new_theme\";
         private const string DefaultPath = @"C:\xampp\htdocs\";
         
-        public void UpdateThemeAsync(DataType type, string title, string content)
+        public void UpdateThemeAsync(string title, string content)
         {
             var fileToUpdate = DefaultPath + title;
             var data = Encoding.UTF8.GetBytes(content);
